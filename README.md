@@ -303,7 +303,6 @@ Sets class to `element`s in `selector`.
 $('input').addClass('formcontrol');
 ```
 
-<<<<<<< HEAD
 ### toggleClass(className: String) => Rmx Instance
 
 #### Arguments
@@ -539,7 +538,6 @@ Removes an `eventName` event on every `element` in `selector`.
 $('button').off('click');
 ```
 
-<<<<<<< HEAD
 ### Is(pattern: String) => Boolean
 
 #### Arguments
@@ -711,7 +709,6 @@ Rmx.extend({
 });
 ```
 
-<<<<<<< HEAD
 #### $.is (Function)
 
 Method returns boolean by checking element equality with given string CSS pattern.
