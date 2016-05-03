@@ -1,7 +1,7 @@
 {
-  "name": "rmxjs",
+  "name": "rmx.js",
   "version": "0.0.0",
-  "homepage": "https://github.com/ramziddin/rmxjs",
+  "homepage": "https://github.com/ramziddin/rmx.js",
   "description": "Friendly JavaScript DOM library",
   "scripts": {
     "test": "node test/main.js"
