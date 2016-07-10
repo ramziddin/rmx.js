@@ -1,0 +1,23 @@
+{
+  "name": "rmx.js",
+  "description": "Friendly JavaScript DOM library",
+  "main": "dist/rmx.js",
+  "authors": [
+    "Ramziddin Makhmudov <@ramziddin>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "JavaScript",
+    "DOM",
+    "Front-End",
+    "Library"
+  ],
+  "homepage": "https://github.com/ramziddin/rmx.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
