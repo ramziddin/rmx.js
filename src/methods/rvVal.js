@@ -1,8 +1,17 @@
-'use strict';
+/* ========= Core ========= */
 
-module.exports = {
-  name: 'Val',
-  core ($) {
-    $.return = $.chain.selector[0].value;
-  }
+/**
+ * Returns value propertie of first
+ * element in selector array.
+ */
+
+const Val = {
+	name: 'Val',
+	core($) {
+		$.return = $.scope.selector[0].value;
+	},
 };
+
+/* ========= Exports ========= */
+
+module.exports = Val;

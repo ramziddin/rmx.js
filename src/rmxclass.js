@@ -1,23 +1,56 @@
-'use strict';
+/* ========= Modules ========= */
 
-let fetchselector = require('./fetchselector');
+const fetchselector = require('./fetchselector');
 
-function Rmx (selector = 'body') {
-  this.dataStorage = Rmx.data();
-  this.selector = fetchselector(selector);
+/* ========= Core ========= */
+
+/**
+ * Rmx class.
+ * Fetches selector and initializes data field.
+ */
+
+function Rmx(selector = 'body') {
+	this.dataStorage = Rmx.data();
+	this.selector = fetchselector(selector);
 }
 
-function $ (selector) {
-  return new Rmx(selector);
+/**
+ * Rmx class helper function.
+ * Returns an instance of Rmx.
+ */
+
+function $(selector) {
+	return new Rmx(selector);
 }
+
+/* === Rmx's static methods === */
+
+/**
+ * Used for exending Rmx class.
+ */
 
 Rmx.extend = $.extend = require('./rmxextend');
+
+/**
+ * Used to deal with data storage.
+ */
+
 Rmx.data = $.data = require('./rmxdata');
+
+/**
+ * A helper method for creating a direct instance of Rmx
+ * with a new element.
+ */
+
 Rmx.create = $.create = (selector) => new Rmx(document.createElement(selector));
 
-// // Method: data
+/**
+ * Note: rvMETHODNAME. "rv" stands for "returns value".
+ */
+
+// Method: data
 Rmx.extend(require('./methods/data'));
-// // Method: Data
+// Method: Data
 Rmx.extend(require('./methods/rvData'));
 // Method: each
 Rmx.extend(require('./methods/each'));
@@ -65,7 +98,15 @@ Rmx.extend(require('./methods/off'));
 Rmx.extend(require('./methods/rvIs'));
 // Method: filter
 Rmx.extend(require('./methods/filter'));
+// Method: fadeIn
+Rmx.extend(require('./methods/fadeIn'));
+// Method: fadeOut
+Rmx.extend(require('./methods/fadeOut'));
+// Method: scroll
+Rmx.extend(require('./methods/scroll'));
+// Method: scrollTop
+Rmx.extend(require('./methods/rvScrollTop'));
 
-// Exporting Rmx
+/* ========= Export ========= */
 
 module.exports = { Rmx, $ };

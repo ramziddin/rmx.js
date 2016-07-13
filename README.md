@@ -734,3 +734,8 @@ Rmx.extend({
   $.return = $.isNull();
 });
 ```
+
+----------------------------------------
+
+More methods and utilities coming soon!
+========================================

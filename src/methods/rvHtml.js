@@ -1,8 +1,17 @@
-'use strict';
+/* ========= Core ========= */
 
-module.exports = {
-  name: 'Html',
-  core ($) {
-    $.return = $.chain.selector[0].innerHTML;
-  }
+/**
+ * Returns an inner html value of
+ * first element in selector array.
+ */
+
+const Html = {
+	name: 'Html',
+	core($) {
+		$.return = $.scope.selector[0].innerHTML;
+	},
 };
+
+/* ========= Exports ========= */
+
+module.exports = Html;

@@ -1,24 +1,37 @@
-'use strict';
+/* ========= Modules ========= */
 
-let utils = require('../utils');
+const utils = require('../utils');
 
-module.exports = {
-  name: 'removeAttr',
-  core ($) {
-    let [attrName, attrValue] = $.arguments;
-    $.when(attrName, {
-      isString () {
-        $.forEach(function (element) {
-          element.removeAttribute(attrName, attrValue);
-        });
-      },
-      isArray () {
-        utils.forEach(attrName, function (key) {
-          $.forEach(function (element) {
-            element.removeAttribute(key);
-          });
-        });
-      }
-    });
-  }
+/* ========= Core ========= */
+
+/**
+ * Removes a single attribute (first string argument) or
+ * an array of attributes (first array of strings argument) from
+ * each element in selector array.
+ */
+
+const removeAttr = {
+	name: 'removeAttr',
+	core($) {
+		let [attrName, attrValue] = $.arguments;
+
+		$.when(attrName, {
+			isString() {
+				$.forEach((element) => {
+					element.removeAttribute(attrName, attrValue);
+				});
+			},
+			isArray() {
+				utils.forEach(attrName, (key) => {
+					$.forEach((element) => {
+						element.removeAttribute(key);
+					});
+				});
+			},
+		});
+	},
 };
+
+/* ========= Exports ========= */
+
+module.exports = removeAttr;

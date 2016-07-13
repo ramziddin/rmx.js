@@ -1,12 +1,21 @@
-'use strict';
+/* ========= Core ========= */
 
-module.exports = {
-  name: 'each',
-  core ($) {
-    if ($.callback) {
-      $.forEach(function (element, index) {
-        $.callback(element, index);
-      });
-    }
-  }
+/**
+ * Iterates over selector array, and passing
+ * current element to the callback (handler).
+ */
+
+const each = {
+	name: 'each',
+	core($) {
+		if ($.callback) {
+			$.forEach((element, index) => {
+				$.callback(element, index);
+			});
+		}
+	},
 };
+
+/* ========= Exports ========= */
+
+module.exports = each;

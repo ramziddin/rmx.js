@@ -1,16 +1,26 @@
-'use strict';
+/* ========= Core ========= */
 
-module.exports = {
-  name: 'off',
-  core ($) {
-    let eventName = $.arguments[0];
-    $.when(eventName, {
-      isString () {
-        $.forEach(function (element) {
-          element.removeEventListener(eventName, $.chain.Data('events.' + eventName));
-          $.chain.dataStorage.events[eventName] = undefined;
-        });
-      }
-    });    
-  }
+/**
+ * Removes an event handler from each
+ * element in selector array.
+ */
+
+const off = {
+	name: 'off',
+	core($) {
+		const eventName = $.arguments[0];
+
+		$.when(eventName, {
+			isString() {
+				$.forEach((element) => {
+					element.removeEventListener(eventName, $.scope.Data('events.' + eventName));
+					$.scope.dataStorage.events[eventName] = undefined;
+				});
+			},
+		});
+	},
 };
+
+/* ========= Exports ========= */
+
+module.exports = off;

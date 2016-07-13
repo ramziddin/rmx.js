@@ -1,82 +1,128 @@
 'use strict';
 
+/**
+ * Set of tools used by Rmx's methods.
+ */
+
+/* ========= Modules ========= */
+
 var Rmx = require('./rmxclass');
 var utils = require('./utils');
 var rmxUtilitiesLogger = utils.logger('rmxutilities');
 
-module.exports = function (self, options) {
-  var exportUtils = {};
+/* ========= Core ========= */
 
-  // Chain
+/**
+ * A function that bases on given
+ * Rmx instance's scope and given data.
+ */
 
-  exportUtils.chain = self;
+function rmxutils(scope, data) {
+	/**
+  * Object that contains all the exported
+  * utilities.
+  */
+	var exportUtils = {};
 
-  // forEach
+	/**
+  * Scope is exported for methods as well
+  * to deal with elements directly.
+  */
+	exportUtils.scope = scope;
 
-  function forEach(handler) {
-    utils.forEach(self.selector, handler.bind(self));
-    return exportUtils;
-  }
+	/**
+  * Port of utils.forEach to rmx utilities
+  * based on selector array.
+  */
 
-  exportUtils.forEach = forEach;
+	function forEach(handler) {
+		utils.forEach(scope.selector, handler.bind(scope));
+		return exportUtils;
+	}
 
-  // arguments
+	exportUtils.forEach = forEach;
 
-  exportUtils.arguments = options.arguments;
+	/**
+  * Arguments passed to method.
+  */
 
-  // callback
+	exportUtils.arguments = data.arguments;
 
-  var callbackFn = options.arguments[options.arguments.length - 1];
+	/**
+  * Callback on method.
+  */
 
-  function callback() {
-    callbackFn.apply(self, arguments);
-    return exportUtils;
-  }
+	var callbackFn = data.arguments[data.arguments.length - 1];
 
-  if (utils.fullTypeOf(callbackFn) === 'Function' ? callbackFn : undefined) {
-    exportUtils.callback = callback;
-  }
+	function callback() {
+		callbackFn.apply(scope, arguments);
+		return exportUtils;
+	}
 
-  // typeOf
+	if (utils.fullTypeOf(callbackFn) === 'Function' ? callbackFn : false) {
+		exportUtils.callback = callback;
+	}
 
-  function typeOf(object) {
-    return utils.fullTypeOf(object);
-  }
+	/**
+  * Alias to utils.typeOf.
+  */
 
-  exportUtils.typeOf = typeOf;
+	function typeOf(object) {
+		return utils.fullTypeOf(object);
+	}
 
-  // when
+	exportUtils.typeOf = typeOf;
 
-  function when(object, events) {
-    var type = utils.fullTypeOf(object);
-    (events[type] || events['is' + type] || function () {}).call(self);
-  }
+	/**
+  * A function that behaves as a switch based
+  * on types of objects.
+  */
 
-  exportUtils.when = when;
+	function when(object, events) {
+		var type = utils.fullTypeOf(object);
+		(events[type] || events['is' + type] || function () {}).call(scope);
+	}
 
-  // isNull
+	exportUtils.when = when;
 
-  function isNull() {
-    return self.selector.length <= 0;
-  }
+	/**
+  * Returns true if selector isn't empty,
+  * else it returns false.
+  */
 
-  exportUtils.isNull = isNull;
+	function isNull() {
+		return scope.selector.length <= 0;
+	}
 
-  // is
+	exportUtils.isNull = isNull;
 
-  function is(element, pattern) {
-    if (element && utils.fullTypeOf(pattern) === 'String') {
-      return (element.matches || element.matchesSelector || element.msMatchesSelector || element.mozMatchesSelector || element.webkitMatchesSelector || element.oMatchesSelector).call(element, pattern);
-    } else {
-      return false;
-    }
-  }
+	/**
+  * Compares an element with a given pattern.
+  */
 
-  exportUtils.is = is;
+	function is(element, pattern) {
+		if (element && utils.fullTypeOf(pattern) === 'String') {
+			return (element.matches || element.matchesSelector || element.msMatchesSelector || element.mozMatchesSelector || element.webkitMatchesSelector || element.oMatchesSelector).call(element, pattern);
+		} else {
+			return false;
+		}
+	}
 
-  // return
+	exportUtils.is = is;
 
-  exportUtils.return = null;
+	/**
+  * A return value of an unsafe function.
+  */
 
-  return exportUtils;
-};
+	exportUtils.return = null;
+
+	/**
+  * Export utilities.
+  */
+
+	return exportUtils;
+}
+
+/* ========= Exports ========= */
+
+module.exports = rmxutils;

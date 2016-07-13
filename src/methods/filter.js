@@ -1,19 +1,33 @@
-'use strict';
+/* ========= Modules ========= */
 
-let utils = require('../utils');
+const utils = require('../utils');
 
-module.exports = {
-  name: 'filter',
-  core ($) {
-    let pattern = $.arguments[0];
-    $.when(pattern, {
-      isString () {
-        let result = [];
-        $.forEach(function (element) {
-          if ($.is(element, pattern) === true) result.push(element);
-        });
-        $.chain.selector = result;
-      }
-    });
-  }
+/* ========= Core ========= */
+
+/**
+ * Filters selector array by given
+ * pattern string.
+ */
+
+const filter = {
+	name: 'filter',
+	core($) {
+		const pattern = $.arguments[0];
+
+		$.when(pattern, {
+			isString() {
+				const result = [];
+
+				$.forEach((element) => {
+					if ($.is(element, pattern) === true) result.push(element);
+				});
+
+				$.scope.selector = result;
+			},
+		});
+	},
 };
+
+/* ========= Exports ========= */
+
+module.exports = filter;

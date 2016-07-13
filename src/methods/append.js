@@ -1,17 +1,29 @@
-'use strict';
+/* ========= Modules ========= */
 
-let fetchselector = require('../fetchselector');
-let utils = require('../utils');
+const fetchselector = require('../fetchselector');
+const utils = require('../utils');
 
-module.exports = {
-  name: 'append',
-  core ($) {
-    $.forEach(function ($element) {
-      utils.forEach($.arguments, function (element) {
-        utils.forEach(fetchselector(element), function (element) {
-          $element.appendChild(element);
-        });
-      });
-    });
-  }
+/* ========= Core ========= */
+
+/**
+ * Append a RMX element to each element
+ * in selector array.
+ */
+
+const append = {
+	name: 'append',
+	core($) {
+		$.forEach(($element) => {
+			utils.forEach($.arguments, (element) => {
+				utils.forEach(fetchselector(element), (element) => {
+					$element.appendChild(element);
+				});
+			});
+		});
+	},
 };
+
+
+/* ========= Exports ========= */
+
+module.exports = append;

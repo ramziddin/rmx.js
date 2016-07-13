@@ -1,8 +1,19 @@
 'use strict';
 
-module.exports = {
-  name: 'Null',
-  core: function core($) {
-    $.return = $.chain.selector.length <= 0;
-  }
+/* ========= Core ========= */
+
+/**
+ * Returns true if selector isn't empty,
+ * else it returns false.
+ */
+
+var Null = {
+	name: 'Null',
+	core: function core($) {
+		$.return = $.scope.selector.length <= 0;
+	}
 };
+
+/* ========= Exports ========= */
+
+module.exports = Null;

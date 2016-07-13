@@ -1,11 +1,20 @@
-'use strict';
+/* ========= Core ========= */
 
-module.exports = {
-  name: 'remove',
-  core ($) {
-    $.forEach(function (element) {
-      element.parentNode.removeChild(element);
-    });
-    $.chain.selector = [];
-  }
+/**
+ * Removes each element in selector array.
+ */
+
+const remove = {
+	name: 'remove',
+	core($) {
+		$.forEach((element) => {
+			element.parentNode.removeChild(element);
+		});
+
+		$.scope.selector = [];
+	},
 };
+
+/* ========= Exports ========= */
+
+module.exports = remove;

@@ -1,12 +1,24 @@
-'use strict';
+/* ========= Modules ========= */
 
-let utils = require('../utils');
+const utils = require('../utils');
 
-module.exports = {
-  name: 'Css',
-  core ($) {
-    let ruleName = $.arguments[0];
-    let selector = $.chain.selector[0];
-    $.return = selector.style[ruleName];
-  }
+/* ========= Core ========= */
+
+/**
+ * Returns a value of style propertie of first
+ * element in selector array.
+ */
+
+const Css = {
+	name: 'Css',
+	core($) {
+		const ruleName = $.arguments[0];
+		const selector = $.scope.selector[0];
+
+		$.return = selector.style[ruleName];
+	},
 };
+
+/* ========= Exports ========= */
+
+module.exports = Css;

@@ -1,82 +1,127 @@
-'use strict';
+/**
+ * Set of tools used by Rmx's methods.
+ */
 
-let Rmx = require('./rmxclass');
-let utils = require('./utils');
-let rmxUtilitiesLogger = utils.logger('rmxutilities')
 
-module.exports = function (self, options) {
-  let exportUtils = {};
+/* ========= Modules ========= */
 
-  // Chain
+const Rmx = require('./rmxclass');
+const utils = require('./utils');
+const rmxUtilitiesLogger = utils.logger('rmxutilities');
 
-  exportUtils.chain = self;
+/* ========= Core ========= */
 
-  // forEach
+/**
+ * A function that bases on given
+ * Rmx instance's scope and given data.
+ */
 
-  function forEach (handler) {
-    utils.forEach(self.selector, handler.bind(self));
-    return exportUtils;
-  }
+function rmxutils(scope, data) {
+	/**
+	 * Object that contains all the exported
+	 * utilities.
+	 */
+	const exportUtils = {};
 
-  exportUtils.forEach = forEach;
+	/**
+	 * Scope is exported for methods as well
+	 * to deal with elements directly.
+	 */
+    exportUtils.scope = scope;
 
-  // arguments
+	/**
+	 * Port of utils.forEach to rmx utilities
+	 * based on selector array.
+	 */
 
-  exportUtils.arguments = options.arguments;
+	function forEach(handler) {
+		utils.forEach(scope.selector, handler.bind(scope));
+		return exportUtils;
+	}
 
-  // callback
+	exportUtils.forEach = forEach;
 
-  let callbackFn = options.arguments[options.arguments.length - 1];
+	/**
+	 * Arguments passed to method.
+	 */
 
-  function callback () {
-    callbackFn.apply(self, arguments);
-    return exportUtils;
-  }
+	exportUtils.arguments = data.arguments;
 
-  if (utils.fullTypeOf(callbackFn) === 'Function' ? callbackFn : undefined) {
-    exportUtils.callback = callback;
-  }
+	/**
+	 * Callback on method.
+	 */
 
-  // typeOf
+	const callbackFn = data.arguments[data.arguments.length - 1];
 
-  function typeOf (object) {
-    return utils.fullTypeOf(object);
-  }
+	function callback() {
+		callbackFn.apply(scope, arguments);
+		return exportUtils;
+	}
 
-  exportUtils.typeOf = typeOf;
+	if (utils.fullTypeOf(callbackFn) === 'Function' ? callbackFn : false) {
+		exportUtils.callback = callback;
+	}
 
-  // when
+	/**
+	 * Alias to utils.typeOf.
+	 */
 
-  function when (object, events) {
-    let type = utils.fullTypeOf(object);
-    (events[type] || events['is' + type] || (() => {})).call(self);
-  }
+	function typeOf(object) {
+		return utils.fullTypeOf(object);
+	}
 
-  exportUtils.when = when;
+	exportUtils.typeOf = typeOf;
 
-  // isNull
+	/**
+	 * A function that behaves as a switch based
+	 * on types of objects.
+	 */
 
-  function isNull () {
-    return self.selector.length <= 0;
-  }
+	function when(object, events) {
+		                  const type = utils.fullTypeOf(object);
+		(events[type] || events['is' + type] || (() => {})).call(scope);
+	}
 
-  exportUtils.isNull = isNull;
+	exportUtils.when = when;
 
-  // is
+	/**
+	 * Returns true if selector isn't empty,
+	 * else it returns false.
+	 */
 
-  function is (element, pattern) {
-    if (element && utils.fullTypeOf(pattern) === 'String') {
-      return (element.matches || element.matchesSelector || element.msMatchesSelector || element.mozMatchesSelector || element.webkitMatchesSelector || element.oMatchesSelector).call(element, pattern);
-    } else {
-      return false;
-    }
-  }
+	function isNull() {
+		return scope.selector.length <= 0;
+	}
 
-  exportUtils.is = is;
+	exportUtils.isNull = isNull;
 
-  // return
+	/**
+	 * Compares an element with a given pattern.
+	 */
 
-  exportUtils.return = null;
+	function is(element, pattern) {
+		if (element && utils.fullTypeOf(pattern) === 'String') {
+			return (element.matches || element.matchesSelector || element.msMatchesSelector || element.mozMatchesSelector || element.webkitMatchesSelector || element.oMatchesSelector).call(element, pattern);
+		} else {
+			return false;
+		}
+	}
 
-  return exportUtils;
+	exportUtils.is = is;
+
+	/**
+	 * A return value of an unsafe function.
+	 */
+
+	exportUtils.return = null;
+
+	/**
+	 * Export utilities.
+	 */
+
+	return exportUtils;
 }
+
+/* ========= Exports ========= */
+
+module.exports = rmxutils;

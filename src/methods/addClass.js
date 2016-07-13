@@ -1,20 +1,32 @@
-'use strict';
+/* ========= Modules ========= */
 
-let utils = require('../utils');
+const utils = require('../utils');
 
-module.exports = {
-  name: 'addClass',
-  core ($) {
-    let className = $.arguments[0];
-    let splittedClassName = className.split(/\s+/g);
-    $.when(className, {
-      isString () {
-        $.forEach(function (element) {
-          utils.forEach(splittedClassName, function (className) {
-            element.classList.add(className);
-          });
-        });
-      }
-    });
-  }
+/* ========= Core ========= */
+
+/**
+ * Takes a class name to be added to all
+ * elements in selector array.
+ */
+
+const addClass = {
+	name: 'addClass',
+	core($) {
+		const className = $.arguments[0];
+		const splittedClassName = className.split(/\s+/g);
+
+		$.when(className, {
+			isString() {
+				$.forEach((element) => {
+					utils.forEach(splittedClassName, (className) => {
+						element.classList.add(className);
+					});
+				});
+			},
+		});
+	},
 };
+
+/* ========= Exports ========= */
+
+module.exports = addClass;

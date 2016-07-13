@@ -1,10 +1,7 @@
 {
-  "extends": "standard",
-  "parser": "babel-eslint",
-  "plugins": [
-    "standard"
-  ],
-  "rules": {
-    "semi": 0
-  }
+    "extends": "airbnb",
+    "plugins": [
+        "react"
+    ],
+    "indent": [4]
 }
