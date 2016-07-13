@@ -17,7 +17,7 @@ const scroll = {
 		if (selector && callback && typeof callback === 'function') {
 			let lst = 0;
 
-			$(selector).on('scroll', (event) => {
+			$.scope.on('scroll', (event) => {
 				let st = $(selector).ScrollTop();
 
 				if (!(st > lst)) {
