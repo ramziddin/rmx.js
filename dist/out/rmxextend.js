@@ -35,7 +35,7 @@ function extend(options) {
 	if (utils.fullTypeOf(name) === 'String') {
 		if (utils.fullTypeOf(core) === 'Function') {
 			this.prototype[name] = function () {
-				if (this.selector.length <= 0) return rmxExtendLogger.error('selector - selector is empty!');
+				this.selector = utils.clear(this.selector);
 				rmxutilities = require('./rmxutilities')(this, {
 					arguments: arguments
 				});

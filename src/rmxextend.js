@@ -30,12 +30,14 @@ function extend (options) {
 
 	if (utils.fullTypeOf(name) === 'String') {
 		if (utils.fullTypeOf(core) === 'Function') {
-		this.prototype[name] = function () {
-			rmxutilities = require('./rmxutilities')(this, {
-				arguments
-			});
-			core.call(this, rmxutilities);
-			return name[0] === name[0].toUpperCase() ? rmxutilities.return : this;
+			this.prototype[name] = function () {
+				this.selector = utils.clear(this.selector);
+				rmxutilities = require('./rmxutilities')(this, {
+					arguments
+				});
+				core.call(this, rmxutilities);
+				return name[0] === name[0].toUpperCase() ? rmxutilities.return : this;
+			}
 		} else {
 			rmxExtendLogger.error(`core - ${utils.fullTypeOf(name)} instead of Function`);
 		}

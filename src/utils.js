@@ -132,6 +132,22 @@ function writePointer(pointer = '', data, value) {
 	return extend(result, data);
 }
 
+/**
+ * Clears an array from falsy values.
+ */
+
+function clear (array) {
+	let newArr = [];
+
+	forEach(array, (element) => {
+		if (!!element) {
+			newArr.push(element);
+		}
+	});
+
+	return newArr; 
+}
+
 /* ========= Extends ========= */
 
 module.exports.toString = toString;
@@ -143,3 +159,4 @@ module.exports.forEach = forEach;
 module.exports.extend = extend;
 module.exports.executePointer = executePointer;
 module.exports.writePointer = writePointer;
+module.exports.clear = clear;

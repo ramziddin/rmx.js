@@ -1,3 +1,5 @@
+'use strict';
+
 /* ========= Core ========= */
 
 /**
@@ -5,18 +7,19 @@
  * that evaluate to false.
  */
 
-const clear = {
+var clear = {
 	name: 'clear',
-	core($) {
-		let newSelector = [];
+	core: function core($) {
+		var newSelector = [];
 
 		$.forEach(function (element) {
-			if (!!element)
+			if (!!element) {
 				newSelector.push(element);
+			}
 		});
 
-		$.selector = newSelector;
-	},
+		$.scope.selector = newSelector;
+	}
 };
 
 /* ========= Exports ========= */

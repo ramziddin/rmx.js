@@ -513,4 +513,13 @@ describe('Rmx', function () {
 			expect(new Rmx('.fade').selector[0].style.display).to.equal('none');
 		});
 	});
+
+	/**
+	 * Scroll top = 0 by default.
+	 */
+
+	it('#ScrollTop', function () {
+		console.log(new Rmx(window).ScrollTop());
+		expect(new Rmx(window).ScrollTop()).to.equal(0);
+	});
 });

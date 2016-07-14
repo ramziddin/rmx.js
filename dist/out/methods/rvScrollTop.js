@@ -7,7 +7,7 @@
  * elements array) scroll top
  */
 
-var scrollTop = {
+var ScrollTop = {
 	name: 'ScrollTop',
 	core: function core($) {
 		var selector = $.scope.selector[0];
@@ -22,4 +22,4 @@ var scrollTop = {
 
 /* ========= Exports ========= */
 
-module.exports = scrollTop;
+module.exports = ScrollTop;

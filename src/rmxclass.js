@@ -106,8 +106,6 @@ Rmx.extend(require('./methods/fadeOut'));
 Rmx.extend(require('./methods/scroll'));
 // Method: scrollTop
 Rmx.extend(require('./methods/rvScrollTop'));
-// Method: clear
-Rmx.extend(require('./methods/clear'));
 
 /* ========= Export ========= */
 
