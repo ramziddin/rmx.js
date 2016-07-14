@@ -20,8 +20,8 @@ var scroll = {
 			(function () {
 				var lst = 0;
 
-				$(selector).on('scroll', function (event) {
-					var st = $(selector).ScrollTop();
+				$.scope.on('scroll', function (event) {
+					var st = $.scope.ScrollTop();
 
 					if (!(st > lst)) {
 						callback(event, 'up');
