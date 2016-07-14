@@ -8,6 +8,7 @@
 const Null = {
 	name: 'Null',
 	core($) {
+		$.scope.clear();
 		$.return = $.scope.selector.length <= 0;
 	},
 };
